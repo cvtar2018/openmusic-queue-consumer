@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
 require('dotenv').config();
+
 const amqp = require('amqplib');
-const PlaylistService = require('./PlaylistService');
+const PlaylistService = require('./PlaylistsService');
 const MailSender = require('./MailSender');
 const Listener = require('./listener');
 

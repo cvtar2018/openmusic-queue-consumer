@@ -6,11 +6,16 @@ class PlaylistsService {
   }
 
   async getPlaylistById(playlistId) {
+    console.log(playlistId);
     const playlistQuery = {
       text: 'SELECT id, name FROM playlists WHERE id = $1',
       values: [playlistId],
     };
     const playlistResult = await this._pool.query(playlistQuery);
+
+    if (!playlistResult.rows.length) {
+      throw new Error('id not found');
+    }
     const playlist = playlistResult.rows[0];
 
     const songsQuery = {
@@ -29,6 +34,7 @@ class PlaylistsService {
       name: playlist.name,
       songs: playlistSongs,
     };
+
     return result;
   }
 }
